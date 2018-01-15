@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Fluxo de Caixa";
+}
+
+<h2>Fluxo de Caixa</h2>
+
+<div class="alert alert-success carregando hide">Carregando</div>
+<div class="alert alert-danger error hide"></div>
+
+<div>
+    <label>Nome:</label>
+    <br />
+    <input id="nome" type="text" />
+    <br />
+    <label>Valor:</label>
+    <br />
+    <input id="valor" type="text" />
+    <br />
+    <label>Operação:</label>
+    <br />
+    <input id="operacao" type="text" />
+    <br />
+    <button id="enviar">Enviar</button>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Valor
+            </th>
+            <th>
+                Operação
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        function carregarLista() {
+            $('.carregando').removeClass("hide");
+            $.ajax({
+                method: "GET",
+                url: "@Html.Raw(Url.Action("","api/Caixa"))",
+                data: {}
+            })
+            .done(function (r) {
+                if (r != undefined) {
+                    $('.table tbody').html("");
+                    for (var i = 0; i < r.length; i++) {
+                        $('.table tbody').append("<tr>");
+                        $('.table tbody').append("<td>" + r[i].Id + "</td>");
+                        $('.table tbody').append("<td>" + r[i].Nome + "</td>");
+                        $('.table tbody').append("<td>" + r[i].Valor + "</td>");
+                        $('.table tbody').append("<td>" + r[i].Operacao + "</td>");
+                        $('.table tbody').append("</tr>");
+                    }
+                    $('.carregando').addClass("hide");
+                }
+            });
+        }
+        carregarLista();
+
+        $('#enviar').on('click', function () {
+            $.ajax({
+                method: "POST",
+                url: "@Html.Raw(Url.Action("Create","api/Caixa"))",
+                data: { Nome: $('#nome').val(), Valor: $('#valor').val(), Operacao: $('#operacao').val() }
+            })
+            .done(function (r) {
+                carregarLista();
+                $('.error').addClass('hide');
+            })
+            .error(function (r) {
+                $('.error').html(r.responseJSON.Message);
+                $('.error').removeClass('hide');
+            });
+        });
+    </script>
+}

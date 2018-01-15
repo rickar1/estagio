@@ -7,8 +7,9 @@ using System.Web.Mvc;
 
 namespace EstagioGRT.Controllers
 {
-    public class HomeController : Controller
+    public class CaixaController : Controller
     {
+        // GET: Caixa
         public ActionResult Index()
         {
             return View();
