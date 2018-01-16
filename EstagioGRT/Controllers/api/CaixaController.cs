@@ -31,6 +31,16 @@ namespace EstagioGRT.Controllers.api
                 return BadRequest("Nome é obrigatório.");
             }
 
+            if (caixa.Valor == 0)
+            {
+                return BadRequest("Valor é obrigatório.");
+            }
+
+            if (!(caixa.Operacao == 'E' || caixa.Operacao == 'S'))
+            {
+                return BadRequest("Operação é obrigatório.");
+            }
+
             GlobalVar.FluxoCaixa.Add(caixa);
             return Ok(caixa);
         }

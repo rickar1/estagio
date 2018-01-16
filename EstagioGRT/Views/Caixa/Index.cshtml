@@ -20,7 +20,7 @@
     <label>*Operação:</label>
     <br />
     <select id="operacao">
-        <option value=" "></option>
+        <option value=" "> </option>
         <option value="E">E</option>
         <option value="S">S</option>
     </select>
@@ -85,6 +85,7 @@
             .done(function (r) {
                 carregarLista();
                 $('.error').addClass('hide');
+                $('#nome').val(''), $('#valor').val(''), $('#operacao').val('');
             })
             .error(function (r) {
                 $('.error').html(r.responseJSON.Message);
