@@ -9,18 +9,21 @@
 <div class="alert alert-danger error hide"></div>
 
 <div>
-    <label>Nome:</label>
+    <label>*Nome:</label>
     <br />
-
     <input id="nome" type="text" />
     <br />
-    <label>Valor:</label>
+    <label>*Valor:</label>
     <br />
     <input id="valor" type="text" />
     <br />
-    <label>Operação:</label>
+    <label>*Operação:</label>
     <br />
-    <input id="operacao" type="text" />
+    <select id="operacao">
+        <option value=" "></option>
+        <option value="E">E</option>
+        <option value="S">S</option>
+    </select>
     <br />
     <button id="enviar">Enviar</button>
 </div>
