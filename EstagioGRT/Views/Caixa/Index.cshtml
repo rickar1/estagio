@@ -68,6 +68,7 @@
                         $('.table tbody').append("<td>" + r[i].Nome + "</td>");
                         $('.table tbody').append("<td>" + r[i].Valor + "</td>");
                         $('.table tbody').append("<td>" + r[i].Operacao + "</td>");
+                        $('.table tbody').append("<td>" + '<button id="deletar"data-id="'+ r[i].Id +'">Deletar</button>' + "</td>");
                         $('.table tbody').append("</tr>");
                     }
                     $('.carregando').addClass("hide");
@@ -90,6 +91,22 @@
             .error(function (r) {
                 $('.error').html(r.responseJSON.Message);
                 $('.error').removeClass('hide');
+            });
+        });
+
+        $('body').on('click', '#deletar', function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                method: "GET",
+                url: "@Html.Raw(Url.Action("Delete","api/Caixa"))" + "/" + id,
+                data: {},
+                success: function () {
+                    $('#table').remove();
+                    alert("Deletado");
+                },
+                error: function () {
+                    alert("Erro ao Deletar");
+                }
             });
         });
     </script>

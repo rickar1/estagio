@@ -50,6 +50,15 @@ namespace EstagioGRT.Controllers.api
         [System.Web.Http.Route("api/Caixa/Delete/{id}")]
         public void Delete(int id)
         {
+           for(int i=0; i < GlobalVar.FluxoCaixa.Count; i++)
+            {
+                Caixa caixa = GlobalVar.FluxoCaixa[i];
+
+                if (i.Equals(id))
+                {
+                    GlobalVar.FluxoCaixa.RemoveAt(i);
+                }
+            }
         }
     }
 }
