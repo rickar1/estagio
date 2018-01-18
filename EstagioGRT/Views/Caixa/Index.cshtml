@@ -101,6 +101,7 @@
                 url: "@Html.Raw(Url.Action("Delete","api/Caixa"))" + "/" + id,
                 data: {},
                 success: function () {
+                    carregarLista();
                     $('#table').remove();
                     alert("Deletado");
                 },
