@@ -18,6 +18,8 @@ namespace EstagioGRT.Controllers.api
             return Ok(GlobalVar.FluxoCaixa);
         }
 
+        // POST: api/Caixa/Editar
+       
         // POST: api/Caixa
         public IHttpActionResult Post([FromBody]Caixa caixa)
         {
@@ -55,8 +57,8 @@ namespace EstagioGRT.Controllers.api
             {
                 if (id == lista[i].Id)
                 {
-                    lista.Remove(lista[i]);
-                }
+                    lista.Remove(lista[i]);                    
+                }                
             }
         }
     }
