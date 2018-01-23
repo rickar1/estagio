@@ -3,6 +3,9 @@
     ViewBag.Title = "Fluxo de Caixa";
 }
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 <h2>Fluxo de Caixa</h2>
 
 <div class="alert alert-success carregando hide">Carregando</div>
@@ -29,8 +32,7 @@
     <button id="enviar">Enviar</button>
 </div>
 
-
-<table class="table table-striped table-bordered table-hover table-condensed">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -50,6 +52,8 @@
     </thead>
     <tbody></tbody>
 </table>
+
+<div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
 
 @section scripts{
     <script type="text/javascript">
@@ -118,6 +122,47 @@
 
 
 
+        });
+
+        Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: 'Fluxo<br>caixas<br>',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 40
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Fluxo do caixa',
+                innerSize: '70%',
+                data: [
+                    ['Entradas', 1],
+                    ['Saidas', 2],  
+                ]
+            }]
         });
     </script>
 }
